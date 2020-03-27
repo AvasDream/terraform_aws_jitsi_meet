@@ -3,7 +3,11 @@
 */
 data "template_file" "install_script" {
   /* File template for the install script */
-  template = "${file("install_jitsi.sh")}"
+  template = "${file("install_jitsi.tpl")}"
+  vars = {
+    email_address = "${var.email_address}"
+    domain_name   = "${var.domain_name}"
+  }
 }
 resource "aws_instance" "jitsi-meet-server" {
   ami                    = "${data.aws_ami.ubuntu.id}"

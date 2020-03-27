@@ -6,3 +6,4 @@
 *_key
 secrets*
 variables*
+.terraform*
