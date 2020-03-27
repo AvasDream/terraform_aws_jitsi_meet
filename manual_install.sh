@@ -1,9 +1,8 @@
 #!/bin/bash
 echo "Script running" >> /running.txt
-export HOSTNAME=""
-HOSTNAME_SHORT=""
-sudo hostnamectl set-hostname $HOSTNAME_SHORT
-sudo sed -i 's/^127.0.1.1.*$/127.0.1.1 $HOSTNAME jitsimeet/g' /etc/hosts
+export HOSTNAME="conference.avasdream.engineer"
+sudo hostnamectl set-hostname $HOSTNAME
+sudo  echo "127.0.0.1 localhost $HOSTNAME" >> /etc/hosts
 sudo apt update
 sudo apt install -y openjdk-8-jre-headless
 echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" | sudo tee -a /etc/profile
