@@ -14,14 +14,12 @@ systemctl enable nginx.service
 wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
 sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list"
 apt update 
-echo "DefaultLimitNOFILE=65000\nDefaultLimitNPROC=65000\nDefaultTasksMax=65000" >> /etc/systemd/system.conf
+echo -e "DefaultLimitNOFILE=65000\nDefaultLimitNPROC=65000\nDefaultTasksMax=65000" >> /etc/systemd/system.conf
 systemctl daemon-reload
 
 debconf-set-selections <<< $(echo 'jitsi-videobridge jitsi-videobridge/jvb-hostname string '$HOSTNAME);
-#debconf-set-selections <<< bash -c 'echo jitsi-videobridge jitsi-videobridge/jvb-hostname string $HOSTNAME';
 debconf-set-selections <<< 'jitsi-meet-web-config   jitsi-meet/cert-choice  select  "Generate a new self-signed certificate"';
-apt install -y jitsi-meet
+apt install -y jitsi-meet &>> /test.txt
 echo "${email_address}" >> /test.txt
 echo "${domain_name}" >> /test.txt
-bash -c 'echo $EMAIL' >> /test.txt
-echo "${email_address}" | sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
+echo "${email_address}" | sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh &>> /test.txt

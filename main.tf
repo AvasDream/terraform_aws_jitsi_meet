@@ -18,7 +18,7 @@ resource "aws_instance" "jitsi-meet-server" {
   tags = {
     Name = "jitsi-meet-server"
   }
-
+  associate_public_ip_address = "false"
   /* This local exec is just for convenience and opens the ssh sessio. */
   provisioner "local-exec" {
     command = "echo putty -ssh ubuntu@${var.eip} 22 -i '${var.ssh_key_path}'"
