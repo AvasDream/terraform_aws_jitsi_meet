@@ -6,7 +6,7 @@ export EMAIL="${email_address}"
 #echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 
 hostnamectl set-hostname $HOSTNAME
-echo "127.0.0.1 localhost $HOSTNAME" > /etc/hosts
+echo -e "127.0.0.1 localhost $HOSTNAME" >> /etc/hosts
 apt update
 apt install -y openjdk-8-jre-headless
 echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" | sudo tee -a /etc/profile
@@ -20,12 +20,15 @@ apt update
 echo -e "DefaultLimitNOFILE=65000\nDefaultLimitNPROC=65000\nDefaultTasksMax=65000" >> /etc/systemd/system.conf
 systemctl daemon-reload
 
-debconf-set-selections <<< $(echo 'jitsi-videobridge jitsi-videobridge/jvb-hostname string '$HOSTNAME);
+debconf-set-selections <<< $(echo 'jitsi-videobridge jitsi-videobridge/jvb-hostname string '$HOSTNAME)
 debconf-set-selections <<< 'jitsi-meet-web-config   jitsi-meet/cert-choice  select  "Generate a new self-signed certificate"';
-apt install -y jitsi-meet &>> /test.txt
+
+# Debug
 echo $EMAIL >> /test.txt
 echo $HOSTNAME >> /test.txt
 cat /etc/resolv.conf >> /test.txt
 whoami >> /test.txt
-id >> /test.txt
+cat /etc/hosts >> /test.txt
+
+apt install -y jitsi-meet &>> /test.txt
 echo $EMAIL | sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh &>> /test.txt

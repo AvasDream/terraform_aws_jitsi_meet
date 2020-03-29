@@ -1,7 +1,6 @@
 resource "aws_security_group" "allow_connections_jitsi-meet" {
   name        = "allow_connections_jitsi-meet"
   description = "Allow TLS inbound traffic for ssh but only for host PCs external IP."
-  #vpc_id      = "${aws_vpc.jitsi_no_hostnames_vpc.id}"
 
   ingress {
     from_port   = 22

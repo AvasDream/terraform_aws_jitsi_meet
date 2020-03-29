@@ -1,3 +1,47 @@
+# Problem
+
+letsencryp http1 challenge cant find path
+
+```
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator webroot, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for conference.avasdream.online
+Using the webroot path /usr/share/jitsi-meet for all unmatched domains.
+Waiting for verification...
+Challenge failed for domain conference.avasdream.online
+http-01 challenge for conference.avasdream.online
+Cleaning up challenges
+Some challenges have failed.
+
+IMPORTANT NOTES:
+ - The following errors were reported by the server:
+
+   Domain: conference.avasdream.online
+   Type:   unauthorized
+   Detail: Invalid response from
+   http://conference.avasdream.online/.well-known/acme-challenge/HvlUbxRkABGarCUT3-kONx0C3JjKu7SngkKmu46i1qI
+   [3.126.129.69]: "<html>\r\n<head><title>404 Not
+   Found</title></head>\r\n<body>\r\n<center><h1>404 Not
+   Found</h1></center>\r\n<hr><center>nginx/1.15.9 (Ub"
+
+   To fix these errors, please make sure that your domain name was
+   entered correctly and the DNS A/AAAA record(s) for that domain
+   contain(s) the right IP address.
+
+```
+
+Tried:
+
+- disable ipv6
+- set google dns server & open udp/53
+- manually install and generate certificates
+- setup vpc, subnet and internet gateway for aws networking and do anything manually.
+- sdgfzwHIRGUOÜRGHI\*=Qeghi+0
+
+fuck my life. computers were a mistake
+
 # Requirements
 
 - Terraform is installed and in the current \$PATH
