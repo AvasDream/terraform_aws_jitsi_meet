@@ -4,7 +4,6 @@ data "template_file" "install_script" {
   vars = {
     email_address = "${var.email_address}"
     domain_name   = "${var.domain_name}"
-    #public_aws_dns = "${aws_instance.jitsi-meet-server.public_dns}"
   }
 }
 resource "aws_instance" "jitsi-meet-server" {
@@ -16,8 +15,6 @@ resource "aws_instance" "jitsi-meet-server" {
   tags = {
     Name = "jitsi-meet-server"
   }
-  associate_public_ip_address = "true"
-  #ipv6_address_count          = 1
   provisioner "local-exec" {
     command = "echo putty -ssh ubuntu@${var.eip} 22 -i '${var.ssh_key_path}'"
   }

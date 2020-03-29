@@ -4,7 +4,9 @@ export HOSTNAME="${domain_name}"
 export EMAIL="${email_address}"
 
 #echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
-
+# diable ipv6
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
 hostnamectl set-hostname $HOSTNAME
 echo -e "127.0.0.1 localhost $HOSTNAME" >> /etc/hosts
 apt update
@@ -31,4 +33,4 @@ whoami >> /test.txt
 cat /etc/hosts >> /test.txt
 
 apt install -y jitsi-meet &>> /test.txt
-echo $EMAIL | sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh &>> /test.txt
+echo $EMAIL | /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh &>> /test.txt
